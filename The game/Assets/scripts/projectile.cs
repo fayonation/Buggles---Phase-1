@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class projectile : MonoBehaviour
 {
+
+    public GameObject muzzle;
+    public GameObject hitSplash;
     public float speed;
+    public float bulletDmg = 1f;
     public float bulletLife = 10; // seconds... kinda
     public float bulletBirth;
-    public float bulletDmg = .1f;
 
-
-    public void setSpeed(float newSpeed){ // hppens when you instantiate bullet
-        speed = newSpeed;
-        bulletBirth = Time.time;
+    private void Start() {
+        if(muzzle!=null){
+            var newMuzzle = Instantiate(muzzle, transform.position, Quaternion.identity);
+            newMuzzle.transform.forward = gameObject.transform.forward;
+        }
     }
     // Update is called once per frame
     void Update()
@@ -24,18 +28,27 @@ public class projectile : MonoBehaviour
         }
     }
 
+
+    public void setSpeed(float newSpeed){ // hppens when you instantiate bullet
+        speed = newSpeed;
+        bulletBirth = Time.time;
+    }
     private void OnTriggerEnter(Collider other) {
         healthControler livingObject = other.GetComponent<healthControler>();
         if(livingObject != null){
             livingObject.takeDmg(bulletDmg);
         }
-        Destroy(gameObject);
+        
+        if(hitSplash!=null){
+            var newHitSplash = Instantiate(hitSplash, transform.position, Quaternion.identity);
+        }
+
+        if(other.transform.parent != null){
+            drop_consumable drop = other.transform.parent.GetComponent<drop_consumable>(); 
+            if(drop == null)
+                Destroy(gameObject);
+        } else {
+                Destroy(gameObject);
+        }
     }
-    // private void OnTriggerStay(Collider other) {
-    //     Destroy(gameObject);
-    // }
-    // private void OnTriggerStay(Collider other) {
-    //     Destroy(gameObject);
-    //     Debug.Log(gameObject);
-    // }
 }

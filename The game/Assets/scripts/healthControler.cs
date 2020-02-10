@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class healthControler : MonoBehaviour
 {
+    Transform mainCam;
     [SerializeField] private healthBar hBar;
 	private Animator animator;
 	private Animator camAnim;
@@ -12,7 +13,10 @@ public class healthControler : MonoBehaviour
     // public GameObject blood;
     // Sprite bloodV;
     public Image blood;
+    public Image deathBg;
+    public Text deathNote;
     float bloodOpacity = 0f;
+    float deathOpacity = 0f;
     bool alive = true;
 
     public float startHealth = 1f;
@@ -22,17 +26,16 @@ public class healthControler : MonoBehaviour
     private void Start() {
         // hBar.setSize(health);
         health = startHealth;
+        mainCam = Camera.main.transform;
     }
     private void Update() {
-        if(blood != null){
-            if(alive){
-                bloodOpacity -= .05f;
-                blood.color = new Color(1f, 1f, 1f, bloodOpacity);
-            } else{
-                bloodOpacity += .002f;
-                blood.color = new Color(0f, 0f, 0f, bloodOpacity);
-            }
-        }
+        controlBloodyDeath();
+        faceCamera();
+    }
+    void faceCamera(){
+        var thisHealthBar = gameObject.transform.Find("healthBar");
+        if(thisHealthBar)
+            thisHealthBar.transform.LookAt(thisHealthBar.transform.position + mainCam.rotation * Vector3.back, mainCam.rotation * Vector3.up);
     }
     public void takeDmg(float bulletDmg){
         animator = gameObject.GetComponent<Animator>();
@@ -45,20 +48,45 @@ public class healthControler : MonoBehaviour
                 bloodOpacity = .4f;
             StartCoroutine(stopHurt(1));
         }
-        health = health - bulletDmg/1000000;
+
+
+        var buggleDefence = gameObject.GetComponent<Buggle>();
+        var playerDefence = gameObject.GetComponent<playerController>();
+        var defence = 0;
+        // this will make sure that we get the defence of the player or the buggle
+        if(buggleDefence != null){
+            defence = buggleDefence.defence;
+        } else if(playerDefence != null) {
+            defence = playerDefence.defence;
+        }
+        var effectiveDamage = bulletDmg - defence;
+
+        Debug.Log(effectiveDamage);
+
+        if(effectiveDamage<0)
+            effectiveDamage = 0;
+        if(alive)
+            health = health - effectiveDamage;
         if(health <= 0){
             health = 0;
-            death();
+            
+            if(gameObject.tag=="Player")
+                death();
+            else
+                Destroy(gameObject);
         } else {
             animator.SetBool("hit", false);
         }
-        if(hBar != null)
-            hBar.setSize(health / startHealth);
+        
+        Debug.Log(health);
+        updateBar();
     }
 
 
 
-    void playerDmg(){
+    public void updateBar(){
+        if(hBar != null)
+            hBar.setSize(health / startHealth);
 
     }
     void death(){
@@ -78,4 +106,25 @@ public class healthControler : MonoBehaviour
  
     camAnim.SetBool("shake", false);
  }
+
+    void controlBloodyDeath(){
+        if(blood != null){
+            if(alive){
+                bloodOpacity -= .05f;
+                deathOpacity = 0;
+                blood.color = new Color(1f, 1f, 1f, bloodOpacity);
+            } else{
+                if(bloodOpacity<.5f)
+                    bloodOpacity += .002f;
+                    
+                if(deathOpacity<.6f)
+                    deathOpacity += .002f;
+
+                blood.color = new Color(0f, 0f, 0f, bloodOpacity);
+                deathBg.color = new Color(0f, 0f, 0f, deathOpacity);
+                deathNote.color = new Color(.6f, 0f, 0f, deathOpacity);
+                // Debug.Log(deathBg.color);
+            }
+        }
+    }
 }

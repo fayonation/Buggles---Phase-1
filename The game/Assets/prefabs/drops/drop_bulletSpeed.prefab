@@ -1,0 +1,177 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!54 &3468206527209269478
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073321861687404344}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!135 &5039272137552075036
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073321861687404344}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.4062518
+  m_Center: {x: -0.0000009525087, y: 0.000000003021467, z: -0.039113197}
+--- !u!1 &8827546231866125440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6610450008953853598}
+  - component: {fileID: 4388976885578674946}
+  - component: {fileID: 7098600939471216447}
+  m_Layer: 0
+  m_Name: drop_bulletSpeed
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6610450008953853598
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8827546231866125440}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -13.649374, y: 1.2153045, z: 7.348}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2073321861687180056}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &4388976885578674946
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8827546231866125440}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2.1437201
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5718601, z: 0}
+--- !u!114 &7098600939471216447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8827546231866125440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6471b952cda507d449ca9713a80f4895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  speed: 0
+  reload: 0
+  bSpeed: 1
+  dmg: 0
+  defence: 0
+--- !u!1001 &2073321861687304600
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6610450008953853598}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 8c95f5e4e2e94404383275577828e238, type: 3}
+      propertyPath: m_Name
+      value: powerUp_bulletSpeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8c95f5e4e2e94404383275577828e238, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8c95f5e4e2e94404383275577828e238, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.974
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8c95f5e4e2e94404383275577828e238, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8c95f5e4e2e94404383275577828e238, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.6798989
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8c95f5e4e2e94404383275577828e238, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.19426143
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8c95f5e4e2e94404383275577828e238, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.19426143
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8c95f5e4e2e94404383275577828e238, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6798989
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8c95f5e4e2e94404383275577828e238, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8c95f5e4e2e94404383275577828e238, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8c95f5e4e2e94404383275577828e238, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8c95f5e4e2e94404383275577828e238, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8c95f5e4e2e94404383275577828e238, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.4646128
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8c95f5e4e2e94404383275577828e238, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.4646128
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 8c95f5e4e2e94404383275577828e238, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4646128
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8c95f5e4e2e94404383275577828e238, type: 3}
+--- !u!1 &2073321861687404344 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 8c95f5e4e2e94404383275577828e238,
+    type: 3}
+  m_PrefabInstance: {fileID: 2073321861687304600}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2073321861687180056 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 8c95f5e4e2e94404383275577828e238,
+    type: 3}
+  m_PrefabInstance: {fileID: 2073321861687304600}
+  m_PrefabAsset: {fileID: 0}

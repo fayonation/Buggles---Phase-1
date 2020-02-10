@@ -1,0 +1,178 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!54 &8506945829616926548
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294438271376104753}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!135 &6624490791448003328
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294438271376104753}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1454967
+  m_Center: {x: -0.0000009587365, y: -2.1562918e-17, z: -0.23415846}
+--- !u!1 &8827546231866125440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6610450008953853598}
+  - component: {fileID: 4388976885578674946}
+  - component: {fileID: 7098600939471216447}
+  m_Layer: 0
+  m_Name: drop_currency
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6610450008953853598
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8827546231866125440}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -13.649374, y: 1.2153045, z: 7.348}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 294438271375671569}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &4388976885578674946
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8827546231866125440}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2.1437201
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5718601, z: 0}
+--- !u!114 &7098600939471216447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8827546231866125440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6471b952cda507d449ca9713a80f4895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currency: 1
+  health: 0
+  runSpeed: 0
+  reload: 0
+  bSpeed: 0
+  dmg: 0
+  defence: 0
+--- !u!1001 &294438271376071569
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6610450008953853598}
+    m_Modifications:
+    - target: {fileID: 100000, guid: af27541d16d38de4ab72b6354b6f909d, type: 3}
+      propertyPath: m_Name
+      value: powerUp_currency
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: af27541d16d38de4ab72b6354b6f909d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: af27541d16d38de4ab72b6354b6f909d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.212
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: af27541d16d38de4ab72b6354b6f909d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.352
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: af27541d16d38de4ab72b6354b6f909d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.023647444
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: af27541d16d38de4ab72b6354b6f909d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.3705715
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: af27541d16d38de4ab72b6354b6f909d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.2875007
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: af27541d16d38de4ab72b6354b6f909d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.88287085
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: af27541d16d38de4ab72b6354b6f909d, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: af27541d16d38de4ab72b6354b6f909d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -14.764001
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: af27541d16d38de4ab72b6354b6f909d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 41.499
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: af27541d16d38de4ab72b6354b6f909d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 30.455002
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: af27541d16d38de4ab72b6354b6f909d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.2256
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: af27541d16d38de4ab72b6354b6f909d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.2256
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: af27541d16d38de4ab72b6354b6f909d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5014509
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: af27541d16d38de4ab72b6354b6f909d, type: 3}
+--- !u!1 &294438271376104753 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: af27541d16d38de4ab72b6354b6f909d,
+    type: 3}
+  m_PrefabInstance: {fileID: 294438271376071569}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &294438271375671569 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: af27541d16d38de4ab72b6354b6f909d,
+    type: 3}
+  m_PrefabInstance: {fileID: 294438271376071569}
+  m_PrefabAsset: {fileID: 0}
