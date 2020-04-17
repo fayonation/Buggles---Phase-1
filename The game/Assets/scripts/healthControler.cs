@@ -24,9 +24,15 @@ public class healthControler : MonoBehaviour
 
 
     private void Start() {
-        // hBar.setSize(health);
         health = startHealth;
         mainCam = Camera.main.transform;
+        // making health bar green if not enemy
+        if(gameObject.GetComponent<Buggle>()!=null){
+            if(!gameObject.GetComponent<Buggle>().enemy){
+                gameObject.transform.Find("healthBar").Find("bar").Find("barSprite").GetComponent<SpriteRenderer>().color = Color.green;
+            }
+        }
+
     }
     private void Update() {
         controlBloodyDeath();
@@ -61,7 +67,7 @@ public class healthControler : MonoBehaviour
         }
         var effectiveDamage = bulletDmg - defence;
 
-        Debug.Log(effectiveDamage);
+        // Debug.Log(effectiveDamage);
 
         if(effectiveDamage<0)
             effectiveDamage = 0;
@@ -78,7 +84,7 @@ public class healthControler : MonoBehaviour
             animator.SetBool("hit", false);
         }
         
-        Debug.Log(health);
+        // Debug.Log(health);
         updateBar();
     }
 
@@ -95,6 +101,7 @@ public class healthControler : MonoBehaviour
         animator.SetBool("dead", true);
         animator.Play("death", 0);
         controller = gameObject.GetComponent<playerController> ();
+        controller.drop();
         Destroy(GameObject.Find("healthBar"));
         controller.enabled = false;
     }

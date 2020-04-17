@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class drop_consumable : MonoBehaviour
 {
+	globalManager gManager;
 
 // public globalManager GlobalManager;
     public bool currency = false;
@@ -26,8 +27,8 @@ public class drop_consumable : MonoBehaviour
     }
 
     private void OnTriggerStay(Collider other) {
-        // health
         if(other.gameObject.tag=="Player"){
+		    gManager = GameObject.Find("GlobalManager").GetComponent<globalManager> ();
             if(health)
                 gotHealth(other.gameObject);
             if(defence)
@@ -58,33 +59,51 @@ public class drop_consumable : MonoBehaviour
     
     void gotDefence(GameObject player){
         playerController dude = player.GetComponent<playerController> ();
-        dude.defence += defenceStep;
+        gManager.defenceBuffs++;
+        gManager.aquiredItems[1] = true;
+        gManager.inventoryLength();
+        dude.updateItems();
         Destroy(gameObject);
     }
     void gotReload(GameObject player){
         playerController dude = player.GetComponent<playerController> ();
-        dude.reloadMultiplier += reloadStep; // there are 10 in world so limit is 2 
+        gManager.reloadBuffs++;
+        gManager.aquiredItems[4] = true;
+        gManager.inventoryLength();
+        dude.updateItems();
         Destroy(gameObject);
     }
     void gotbSpeed(GameObject player){
         playerController dude = player.GetComponent<playerController> ();
-        dude.bltSpeedMultiplier += bltSpdStep; // there are 10 in world so limit is 2 
+        gManager.bltSpeedBuffs++;
+        gManager.aquiredItems[2] = true;
+        gManager.inventoryLength();
+        dude.updateItems();
         Destroy(gameObject);
     }
     void gotDmg(GameObject player){
         playerController dude = player.GetComponent<playerController> ();
-        dude.dmgMultiplier += dmgStep; // there are 10 in world so limit is 2 
+        gManager.dmgBuffs++;
+        gManager.aquiredItems[3] = true;
+        gManager.inventoryLength();
+        dude.updateItems();
         Destroy(gameObject);
     }
     void gotRunSpeed(GameObject player){
         playerController dude = player.GetComponent<playerController> ();
-        dude.runSpeed += runSpdStep; // there are 10 in world so limit is 2 
+        gManager.runSpeedBuffs++;
+        gManager.aquiredItems[5] = true;
+        gManager.inventoryLength();
+        dude.updateItems();
         Destroy(gameObject);
     }
     void gotCurrency(GameObject player){
-        globalManager GlobalManager =  GameObject.Find("GlobalManager").GetComponent<globalManager> ();
-        GlobalManager.flous += 5;
-        Debug.Log(GlobalManager.flous);
+        playerController dude = player.GetComponent<playerController> ();
+        gManager.bananas+=5;
+        gManager.aquiredItems[0] = true;
+        gManager.inventoryLength();
+        dude.updateItems();
+        // Debug.Log(gManager.bananas);
         Destroy(gameObject);
     }
 }

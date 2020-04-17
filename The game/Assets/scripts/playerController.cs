@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent (typeof (healthControler))]
 public class playerController : MonoBehaviour
 {
+
 	// [SerializeField] private Material hightlightedMaterial;
    	[Tooltip("Is this character currently controllable by the player"), SerializeField]
 	public bool isHandlingInput = true;
@@ -12,12 +14,15 @@ public class playerController : MonoBehaviour
 	public float fallMultiplier = 10f;
 	private float jumpTimeLimit;
 	GameObject thingToGrab;
+	globalManager gManager;
 	float throwForce = 250f;
 	public GameObject HoldingForceField;
+	public GameObject buffAura;
 	GameObject selector;
 	GameObject newHoldingForceField = null;
 	public bool isHolding = false;
 	healthControler playerHealthControler;
+	public int bananas = 0;
 	public int defence = 0;
 	public float reloadMultiplier = 1;
 	public float dmgMultiplier = 1;
@@ -43,12 +48,14 @@ public class playerController : MonoBehaviour
 	private Animator animator;
 	[Tooltip("The character will consider anything in this LayerMask to be 'Ground'"), SerializeField]
 	private LayerMask groundLayerMask;
+	Transform holdPosition;
 
 	void Awake () {
 		rigidbody = GetComponent<Rigidbody> ();
         animator = GetComponent<Animator>();
+		gManager = GameObject.Find("GlobalManager").GetComponent<globalManager> ();
 		playerHealthControler = GetComponent<healthControler> ();
-
+		updateItems();
 	}
 
 	void FixedUpdate () {
@@ -62,6 +69,14 @@ public class playerController : MonoBehaviour
 				drop();
 			}
 		}
+		
+		if(Input.GetMouseButtonUp(1)){
+			holdPosition.GetComponent<holdingController>().shootMode = !holdPosition.GetComponent<holdingController>().shootMode;
+		}
+        if (Input.GetMouseButton(0) && thingToGrab!=null && holdPosition.GetComponent<holdingController>().shootMode){
+			thingToGrab.GetComponent<shootController>().shoot();
+		}
+		
 	}
     private void LateUpdate() {
         toggleAnimations();
@@ -103,7 +118,7 @@ public class playerController : MonoBehaviour
 		movement = forwardMove * v + horizontalMove * h;
 
 
-		movement = movement.normalized * runSpeed * Time.deltaTime;
+		movement = movement.normalized * runSpeed * runSpeedMultiplier * Time.deltaTime;
 		rigidbody.MovePosition (transform.position + movement);
 	}
 
@@ -153,11 +168,20 @@ public class playerController : MonoBehaviour
 
 	void grab(){
 		if(thingToGrab!=null){
-			Transform holdPosition = GameObject.Find("buggleHold").GetComponent<Transform>();
+			// heldObject = GameObject.Find("buggleHold").GetComponent<Transform>();
+			holdPosition = GameObject.Find("buggleHold").GetComponent<Transform>();
 			isHolding = true;
 			// HoldingForceField
             newHoldingForceField = Instantiate(HoldingForceField, holdPosition.position, holdPosition.rotation);
 			newHoldingForceField.transform.parent = holdPosition;
+
+
+			if(thingToGrab.transform.Find("buffAura(Clone)")!=null){
+				GameObject oldAura = thingToGrab.transform.Find("buffAura(Clone)").gameObject;
+				Destroy(oldAura);
+			}
+
+
 			thingToGrab.GetComponent<shootController>().held = true;
 			thingToGrab.GetComponent<Rigidbody>().isKinematic = true;
 			thingToGrab.GetComponent<Collider>().enabled = false;
@@ -166,6 +190,8 @@ public class playerController : MonoBehaviour
 			thingToGrab.GetComponent<Rigidbody>().velocity = rigidbody.velocity;
 			thingToGrab.transform.position = holdPosition.position;
 			thingToGrab.transform.rotation = holdPosition.rotation;
+			thingToGrab.GetComponent<Buggle>().buffTime = 30f;
+			thingToGrab.GetComponent<Buggle>().buffed = true;
 			//give picked up buggle same stats
 			thingToGrab.GetComponent<Buggle>().defence = defence;
 			thingToGrab.GetComponent<Buggle>().reloadMultiplier = reloadMultiplier;
@@ -175,15 +201,23 @@ public class playerController : MonoBehaviour
 
 		}
 	}
-	void drop(){
+	public void drop(){
 		isHolding = false;
+		holdPosition = GameObject.Find("buggleHold").GetComponent<Transform>();
+		holdPosition.GetComponent<holdingController>().shootMode = false;
 		Destroy(newHoldingForceField);
+		GameObject aura = Instantiate(buffAura, thingToGrab.transform.position, thingToGrab.transform.rotation);
+  		aura.transform.parent = thingToGrab.transform;
+
 		thingToGrab.GetComponent<shootController>().held = false;
 		thingToGrab.GetComponent<Rigidbody>().isKinematic = false;
 		thingToGrab.GetComponent<Collider>().enabled = true;
 		thingToGrab.GetComponent<Buggle>().allowedToShoot = true;
+		thingToGrab.GetComponent<Buggle>().buffTime = 30f;
+		thingToGrab.GetComponent<Buggle>().buffed = true;
+		thingToGrab.transform.rotation = gameObject.transform.rotation;
 		thingToGrab.transform.parent = null;
-		selector.GetComponent<Renderer>().enabled = false;
+		selector.GetComponent<Image>().enabled = false;
 		if(isMoving)
 			thingToGrab.GetComponent<Rigidbody>().AddForce((transform.forward*2 + transform.up) * throwForce);
 		// velocity is back on its own
@@ -204,7 +238,7 @@ public class playerController : MonoBehaviour
 			if(!theBuggle.enemy){
 				if(selector==null)
 					selector = GameObject.Find("selector");
-				selector.GetComponent<Renderer>().enabled = true;
+				selector.GetComponent<Image>().enabled = true;
 				if(thingToGrab ==null)
 					thingToGrab = other.gameObject;
 			}else{
@@ -221,9 +255,16 @@ public class playerController : MonoBehaviour
 
 		if(other.gameObject.tag == "buggle") {
         	GameObject selector = GameObject.Find("selector");
-			selector.GetComponent<Renderer>().enabled = false;
+			selector.GetComponent<Image>().enabled = false;
 			thingToGrab = null;
 		}
 	}
-
+	public void updateItems(){
+		bananas = gManager.bananas;
+		defence = gManager.defenceBuffs;
+		dmgMultiplier = 1 + gManager.dmgBuffs/10;
+		reloadMultiplier = 1 + gManager.bltSpeedBuffs/20;
+		runSpeedMultiplier = 1 + gManager.runSpeedBuffs/10;
+		bltSpeedMultiplier = 1 + gManager.bltSpeedBuffs/10;
+	}
 }

@@ -5,18 +5,18 @@ using UnityEngine;
 public class cameraController : MonoBehaviour
 {
 	[Tooltip ("What the camera will look at."), SerializeField]
-	private Transform target;
+	public Transform target;
 	[Tooltip ("How far the camera currently is from the target."), SerializeField]
-	private float distance = 6.0f;
+	public float distance = 10.0f;
 	[Tooltip ("How fast the camera moves horizontally."), SerializeField]
 	private float xSpeed = 10.0f;
 	[Tooltip ("How fast the camera moves vertically."), SerializeField]
 	private float ySpeed = 10.0f;
 
 	[Tooltip ("Minimum angle of the camera on the y axis."), SerializeField]
-	private float yMinLimit = 10f;
+	public float yMinLimit = 10f;
 	[Tooltip ("Maximum angle of the camera on the y axis."), SerializeField]
-	private float yMaxLimit = 80f;
+	public float yMaxLimit = 80f;
 
 	[Tooltip ("Minimum angle of the camera on the x axis."), SerializeField]
 	private float xMinLimit = -360f;

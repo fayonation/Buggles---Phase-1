@@ -20,7 +20,7 @@ public class shootController : MonoBehaviour
     }
     private void Update() {
         // if(Input.GetMouseButton(0))
-        //     shoot();
+        //      t();
     }
     public void shoot(){
         if(Time.time > nextShotTime){
