@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 3341688}
   - component: {fileID: 2314964}
   - component: {fileID: 6467790}
-  m_Layer: 0
+  - component: {fileID: 5115231915858510459}
+  m_Layer: 9
   m_Name: Clifftile Diagonal
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,9 +27,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119986}
-  m_LocalRotation: {x: 0.0000000218557, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9999999, y: 1, z: 1}
+  m_LocalScale: {x: 1.8764004, y: 1.8764, z: 1.8764005}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -89,6 +90,22 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
+  m_Convex: 1
+  m_CookingOptions: -1
   m_Mesh: {fileID: 4300000, guid: 65a0fc083db91114ab4198ec19e86c93, type: 3}
+--- !u!54 &5115231915858510459
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119986}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 10000
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
