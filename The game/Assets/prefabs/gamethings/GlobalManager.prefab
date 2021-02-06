@@ -43,14 +43,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e13292783d1be6441973804e6d6acf62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inv: {fileID: 3496774965532037362, guid: a318575e8e00c5048b2dfcce00078d01, type: 3}
+  inv: {fileID: 0}
   bananas: 100
-  defenceBuffs: 0
-  dmgBuffs: 0
-  bltSpeedBuffs: 0
-  runSpeedBuffs: 0
-  reloadBuffs: 0
+  defenceBuffs: 2
+  dmgBuffs: 2
+  bltSpeedBuffs: 2
+  runSpeedBuffs: 2
+  reloadBuffs: 2
   aquiredItems: 000000000000
   bananaSlot: {fileID: 0}
   defenceSlot: {fileID: 0}
+  dmgSlot: {fileID: 0}
+  bltSpeedSlot: {fileID: 0}
+  runSpeedSlot: {fileID: 0}
+  reloadSlot: {fileID: 0}
+  bananas_UI: {fileID: 0}
   defence_UI: {fileID: 0}
+  dmg_UI: {fileID: 0}
+  runSpeed_UI: {fileID: 0}
+  bltSpeed_UI: {fileID: 0}
+  reload_UI: {fileID: 0}
